@@ -1,0 +1,43 @@
+{% extends 'main/base.html' %}
+{% load my_tags %}
+{% block content %}
+
+<br>
+<div class="container">
+
+    <br>
+    <div class="row">
+        {% for object in object_list %}
+        {% csrf_token %}
+
+        <div class="col">
+            <div class="card text-center">
+                <div class="card-header">Пользователь: {{object.email}}</div>
+                <div class="card-body">
+                    <p class="card-text">Телефон: {{object.phone}}</p>
+                    <p class="card-text">Страна: {{object.country}}</p>
+                    <a href="{% url 'users:update_user' object.id %}" class="btn btn-outline-primary">Режим
+                        активации</a>
+
+
+                    {% if user.is_superuser or perms.users.can_deactivate_user %}
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <h6>
+                        {% if object.is_active %}
+                        <h6 class="text-center">Активен</h6>
+                        {% else %}
+                        <h6 class="text-center">Неактивен</h6>
+                        {% endif %}
+                    </h6>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

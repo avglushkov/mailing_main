@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+<div class="col-sm-4 mb-3 mb-sm-0">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title">{{ object.name }}</h4>
+            <p class="card-text">Время первой рассылки: {{ object.first_sending_time }}</p>
+            <p class="card-text">Периодичность: {{ object.periodicity }}</p>
+            <p class="card-text">Статус: {{ object.status  }}</p>
+            <p class="card-text">Клиенты: {{ object.clients }}</p>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
