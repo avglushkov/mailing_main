@@ -12,7 +12,7 @@
         <th scope="col">Рассылка</th>
         <th scope="col">Время</th>
         <th scope="col">Статус</th>
-        <th scope="col">Адресат</th>
+        <!--        <th scope="col">Адресат</th>-->
         <th scope="col">Ответ сервера</th>
     </tr>
     </thead>
@@ -23,8 +23,20 @@
     <tr>
         <th scope="row">{{ object.mailing }}</th>
         <td>{{ object.attempt_time }}</td>
-        <td>{{ object.mailing.status }}</td>
-        <td>{{ object.client }}</td>
+
+        {% if object.mailing.status == 'new' %}
+        <td class="text-primary">Создана</td>
+        {% endif %}
+        {% if object.mailing.status == 'started' %}
+        <td class="text-success">Запущена</td>
+        {% endif %}
+        {% if object.mailing.status == 'finished' %}
+        <td class="text-danger">Завершена</td>
+        {% endif %}
+
+
+        <!--        <td>{{ object.mailing.status }}</td>-->
+        <!--        <td>{{ object.client }}</td>-->
         <td>{{ object.server_answer }}</td>
     </tr>
     {% endfor %}
