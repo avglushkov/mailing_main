@@ -14,7 +14,6 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +24,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY")
-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", False) == "True"
@@ -41,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_apscheduler',
 
     'main',
     'users',
+    'blog',
 
 ]
 
@@ -147,7 +147,6 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", False) == "True"
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", False) == "True"
 
-
 # DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
@@ -167,3 +166,5 @@ if CACHE_ENABLED:
         }
     }
 
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds

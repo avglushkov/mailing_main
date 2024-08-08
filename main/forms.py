@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import BooleanField
 
-from main.models import Client, Mailing, Message, Attempt
+from main.models import Client, Mailing, Notification, Attempt
 
 
 class StyleFormMixin:
@@ -25,15 +25,19 @@ class StyleMixin:
 class MailingForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Mailing
-        fields = '__all__'
+        exclude = ('owner', 'is_active',)
 
 class ClientForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Client
-        fields = '__all__'
+        exclude = ('owner',)
 
-class MessageForm(StyleFormMixin, forms.ModelForm):
+class NotificationForm(StyleFormMixin, forms.ModelForm):
     class Meta:
-        model = Message
-        fields = '__all__'
+        model = Notification
+        exclude = ('owner',)
 
+class MailingActivationForm(StyleFormMixin,forms.ModelForm):
+    class Meta:
+        model = Mailing
+        fields = ("is_active",)

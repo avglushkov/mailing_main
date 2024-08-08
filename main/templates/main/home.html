@@ -3,41 +3,95 @@
 
 {% block content %}
 
-<dev>
-    <h2 class="my-0 px-3 py-3 pt-md-3 pb-md-4 mr-md-auto font-weight-normal">Рассылки</h2>
-</dev>
-<br>
-<div class="row">
-    {% if user.is_authenticated %}
-    <div class="col-sm-12 mb-5">
-        <a class="btn btn-primary" href="{% url 'main:mailing_create' %}">Добавить рассылку</a>
-    </div>
-    {% endif %}
 
-</div>
+<div class="row mb-3">
 
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header text-bg-secondary">
+                <h5 class="card-title text-center">ВСЕГО РАССЫЛОК</h5>
+            </div>
+            <div class="card-body text-center" style="height: 200px">
 
-{% for object in object_list %}
-
-<div class="col-sm-4 mb-3 mb-sm-3">
-    <div class="card">
-        <div class="card-body bg-secondary-subtle">
-
-
-            <h4 class="card-title">{{ object }}</h4>
-            <br>
-
-            <p>{{ object.first_sending_time }}</p>
-            <p>{{ object.status }}</p>
-
-            <a class="link-success" href="{% url 'main:mailing_detail' object.pk%}">Подробнее</a>
-            <a class="link-warning" href="{% url 'main:mailing_update' object.pk%}">Изменить</a>
-            <a class="link-danger" href="#">Удалить</a>
-
+                <h1 class="display-1">
+                    <strong>
+                        {{ users_mailings }}
+                    </strong>
+                </h1>
+            </div>
         </div>
     </div>
-</div>
-{% endfor %}
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header text-bg-secondary">
+                <h5 class="card-title text-center">АКТИВНЫХ РАССЫЛОК</h5>
+            </div>
+            <div class="card-body text-center" style="height: 200px">
 
+                <h1 class="display-1">
+                    <strong>
+                        {{active_mailings}}
+                    </strong>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header text-bg-secondary">
+                <h5 class="card-title text-center">АКТИВНЫХ КЛИЕНТОВ</h5>
+            </div>
+            <div class="card-body text-center" style="height: 200px">
+
+                <h1 class="display-1">
+                    <strong>
+                        {{ clients }}
+                    </strong>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <br><br>
+</div>
+
+
+<div class="row mb-3">
+    <br><br>
+    <br><br>
+    <div class="pricing-header px-3 py-3 pt-md-3 pb-md-4 mx-auto text-center">
+            <h4 class="display-8"><strong>Публикации</strong></h4>
+        </div>
+
+    <table class="table">
+        <thead class="table-secondary">
+        <tr>
+            <th scope="col">Публикация</th>
+            <th scope="col">Текст</th>
+            <th scope="col">Просмотры</th>
+            <th scope="col">Статус</th>
+            <th scope="col">Ссылка</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        {% for blog in blog_list %}
+        <tr>
+            <th scope="row">{{ blog.header }}</th>
+            <td>{{ blog.body|truncatechars:50 }}</td>
+            <td>{{ blog.count }}</td>
+            <td>{{ blog.published }}</td>
+            <td>
+                <a class="btn btn-outline-success" href="{% url 'blog:blog_detail' blog.pk %}">
+                    Подробнее
+                </a>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+
+</div>
 {% endblock %}
 

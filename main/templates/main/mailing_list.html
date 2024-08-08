@@ -1,0 +1,73 @@
+{% extends 'main/base.html' %}
+{% load my_tags %}
+
+{% block content %}
+
+<br>
+<div class="row">
+    {% if user.is_authenticated %}
+    <div class="col-sm-12 mb-5">
+        <a class="btn btn-secondary btn-lg" href="{% url 'main:mailing_create' %}">Добавить рассылку</a>
+    </div>
+    {% endif %}
+
+</div>
+
+
+{% for object in object_list %}
+
+<div class="col-sm-6 mb-3 mb-sm-3">
+    <div class="card">
+        <div class="card-header text-bg-secondary">
+            <h5 class="card-title text-center">{{ object.name }}</h5>
+        </div>
+        <div class="card-body bg-light-subtle">
+
+            <p>Начало рассылки - {{ object.first_sending}}</p>
+            <p>Последняя отправка - {{ object.last_sending}}</p>
+            <p>Следующая отправка - {{ object.next_sending}}</p>
+            <p>Дата деактивации - {{ object.block_sending}}</p>
+
+            {% if object.periodicity == 'daily' %}
+            <p>Периодичность - Раз в день</p>
+            {% endif %}
+            {% if object.periodicity == 'weekly' %}
+            <p>Статус - Раз в неделю</p>
+            {% endif %}
+            {% if object.periodicity == 'monthly' %}
+            <p>Статус - Раз в месяц</p>
+            {% endif %}
+
+            {% if object.status == 'started' %}
+            <p>Статус - Запущена</p>
+            {% endif %}
+            {% if object.status == 'new' %}
+            <p>Статус - Создана</p>
+            {% endif %}
+            {% if object.status == 'finished' %}
+            <p>Статус - Завершена</p>
+            {% endif %}
+
+            <a class="btn btn-outline-success" href="{% url 'main:mailing_detail' object.pk%}">Подробнее</a>
+
+            {% if user.is_superuser or perms.main.change_mailings or object.owner == user%}
+            <a class="btn btn-outline-warning" href="{% url 'main:mailing_update' object.pk%}">Изменить</a>
+            <a class="btn btn-outline-danger" href="{% url 'main:mailing_delete' object.pk%}">Удалить</a>
+            {% endif %}
+
+
+            {% if user.is_superuser or perms.main.can_disable_mailings %}
+            {% if object.is_active %}
+            <a class="btn btn-warning" href="{% url 'main:mailing_activation' object.pk%}">Отключить</a>
+            {% else %}
+            <a class="btn btn-info" href="{% url 'main:mailing_activation' object.pk%}">Подключить</a>
+            {% endif %}
+            {% endif %}
+        </div>
+
+
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
