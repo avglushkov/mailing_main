@@ -12,7 +12,7 @@ class UserProfileForm(StyleFormMixin, forms.ModelForm):
 
     class Meta:
         model =User
-        fields = ('email', 'first_name', 'last_name', 'avatar', 'is_active',)
+        fields = ('email', 'first_name', 'last_name', 'avatar',)
 
 
 class UserPasswordRecoveryForm(forms.ModelForm):

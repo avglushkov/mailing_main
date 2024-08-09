@@ -9,7 +9,7 @@
 
             <form method="post">
                 {% csrf_token %}
-                <p>Вы уверены, что хотите удалить клиента"{{ object.header }}"?</p>
+                <p>Вы уверены, что хотите удалить клиента"?</p>
 
                 <button type="submit" class="btn btn-danger">Подтверждаю</button>
                 <a href="{% url 'main:clients' %}" class="btn btn-warning">Отменить</a>

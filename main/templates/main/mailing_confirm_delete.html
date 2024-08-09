@@ -9,7 +9,7 @@
 
             <form method="post">
                 {% csrf_token %}
-                <p>Вы уверены, что хотите удалить рассылку"{{ object.header }}"?</p>
+                <p>Вы уверены, что хотите удалить рассылку"?</p>
 
                 <button type="submit" class="btn btn-danger">Подтверждаю</button>
                 <a href="{% url 'main:mailings' %}" class="btn btn-warning">Отменить</a>

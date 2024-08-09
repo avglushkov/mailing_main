@@ -19,7 +19,7 @@
         <th scope="col">Публикация</th>
         <th scope="col">Текст</th>
         <th scope="col">Просмотры</th>
-        <th scope="col">Статус</th>
+        <th scope="col">Статус публикации</th>
         <th scope="col">Ссылка</th>
     </tr>
     </thead>
@@ -31,7 +31,13 @@
         <th scope="row">{{ object.header }}</th>
         <td>{{ object.body|truncatechars:50 }}</td>
         <td>{{ object.count }}</td>
-        <td>{{ object.published }}</td>
+        <td>
+            {% if object.published %}
+            <p>Да</p>
+            {% else %}
+            <p>Нет</p>
+            {% endif %}
+        </td>
         <td>
             <a class="btn btn-outline-success" href="{% url 'blog:blog_detail' object.pk %}">
                 Подробнее
@@ -40,7 +46,6 @@
             <a class="btn btn-outline-warning" href="{% url 'blog:blog_update' object.pk %}">Изменить</a>
             <a class="btn btn-outline-danger" href="{% url 'blog:confirm_delete' object.pk %}">Удалить</a>
             {% endif %}
-
 
     </tr>
     {% endfor %}

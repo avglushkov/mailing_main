@@ -1,0 +1,102 @@
+[
+  {
+    "model": "main.mailing",
+    "pk": 7,
+    "fields": {
+      "name": "Замедление Youtube",
+      "first_sending": "2024-08-09T11:00:00Z",
+      "last_sending": null,
+      "next_sending": null,
+      "block_sending": null,
+      "periodicity": "daily",
+      "status": "new",
+      "notification": 5,
+      "owner": 19,
+      "is_active": true,
+      "clients": [
+        1,
+        5
+      ]
+    }
+  },
+  {
+    "model": "main.mailing",
+    "pk": 8,
+    "fields": {
+      "name": "Умный звонок для велосипеда",
+      "first_sending": "2024-08-09T10:00:00Z",
+      "last_sending": null,
+      "next_sending": null,
+      "block_sending": null,
+      "periodicity": "weekly",
+      "status": "new",
+      "notification": 8,
+      "owner": 19,
+      "is_active": true,
+      "clients": [
+        1,
+        5,
+        7
+      ]
+    }
+  },
+  {
+    "model": "main.mailing",
+    "pk": 9,
+    "fields": {
+      "name": "Российский «Гравитон»",
+      "first_sending": "2024-08-09T22:00:00Z",
+      "last_sending": null,
+      "next_sending": null,
+      "block_sending": null,
+      "periodicity": "daily",
+      "status": "new",
+      "notification": 10,
+      "owner": 19,
+      "is_active": true,
+      "clients": [
+        5,
+        1,
+        7
+      ]
+    }
+  },
+  {
+    "model": "main.mailing",
+    "pk": 10,
+    "fields": {
+      "name": "Смартфонов Xiaomi станет больше",
+      "first_sending": "2024-08-09T22:00:00Z",
+      "last_sending": null,
+      "next_sending": null,
+      "block_sending": null,
+      "periodicity": "daily",
+      "status": "new",
+      "notification": 9,
+      "owner": 19,
+      "is_active": true,
+      "clients": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "main.mailing",
+    "pk": 11,
+    "fields": {
+      "name": "CMF Watch Pro 2",
+      "first_sending": "2024-08-09T21:00:00Z",
+      "last_sending": null,
+      "next_sending": null,
+      "block_sending": "2024-08-12T12:04:00Z",
+      "periodicity": "weekly",
+      "status": "new",
+      "notification": 7,
+      "owner": 19,
+      "is_active": true,
+      "clients": [
+        7
+      ]
+    }
+  }
+]

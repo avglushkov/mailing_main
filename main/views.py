@@ -9,9 +9,11 @@ from blog.models import Blog
 
 
 class MainPage(TemplateView):
+    """Вывод главной страницы"""
     extra_context = {'title': 'Главная'}
 
     def get(self, request, *args, **kwargs):
+        """Формирование контента главной страницы"""
         blog_list = list(Blog.objects.all())
         random.shuffle(blog_list)
 
@@ -26,6 +28,7 @@ class MainPage(TemplateView):
 
 
 class MailingListView(LoginRequiredMixin,  ListView):
+    """Вывод списка рассылок"""
     model = Mailing
     template_name = 'main/mailing_list.html'
     # permission_required = ('main.can_disable_mailings' or 'main.view_mailing')
@@ -33,6 +36,7 @@ class MailingListView(LoginRequiredMixin,  ListView):
 
 
 class MailingCreateView(LoginRequiredMixin, CreateView):
+    """Новая рассылка"""
     model = Mailing
     form_class = MailingForm
     template_name = 'main/mailing_form.html'
@@ -47,6 +51,7 @@ class MailingCreateView(LoginRequiredMixin, CreateView):
 
 
 class MailingUpdateView(LoginRequiredMixin, UpdateView):
+    """Изменение рассылки"""
     model = Mailing
     form_class = MailingForm
     template_name = 'main/mailing_form.html'
@@ -55,12 +60,16 @@ class MailingUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class MailingDetailView(DetailView):
+    """Детализация рассылки"""
+
     model = Mailing
     template_name = 'main/mailing_detail.html'
     extra_context = {'title': 'Рассылкa'}
 
 
 class MailingActivationView(LoginRequiredMixin, UpdateView):
+    """Активация или деактивация рассылки"""
+
     model = Mailing
     template_name = 'main/mailing_activation.html'
     form_class = MailingActivationForm
@@ -69,21 +78,23 @@ class MailingActivationView(LoginRequiredMixin, UpdateView):
 
 
 class NotificationListView(ListView):
+    """Вывод списка сообщений"""
+
     model = Notification
     extra_context = {'title': 'Сообщения'}
 
 
 class ClientListView(ListView):
+    """Вывод списка клиентов"""
+
     model = Client
     extra_context = {'title': 'Клиенты'}
 
 
-class AttemptListView(ListView):
-    model = Attempt
-    extra_context = {'title': 'Рассылки'}
-
 
 class ClientCreateView(LoginRequiredMixin, CreateView):
+    """Новый клиент"""
+
     model = Client
     form_class = ClientForm
     template_name = 'main/client_form.html'
@@ -91,6 +102,7 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
     extra_context = {'title': 'Новый клиент'}
 
     def form_valid(self, form):
+        """Определение владельца"""
         client = form.save()
         client.owner = self.request.user
         client.save()
@@ -98,6 +110,7 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
 
 
 class NotificationCreateView(LoginRequiredMixin, CreateView):
+    """Новое сообщение"""
     model = Notification
     form_class = NotificationForm
     template_name = 'main/notification_form.html'
@@ -112,6 +125,8 @@ class NotificationCreateView(LoginRequiredMixin, CreateView):
 
 
 class ClientUpdateView(LoginRequiredMixin, UpdateView):
+    """Изменение клиента"""
+
     model = Client
     form_class = ClientForm
     template_name = 'main/client_form.html'
@@ -120,12 +135,15 @@ class ClientUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class ClientDetailView(DetailView):
-    model = Client
+    """Детализация клиента"""
 
+    model = Client
     extra_context = {'title': 'Клиент'}
 
 
 class NotificationUpdateView(LoginRequiredMixin, UpdateView):
+    """Изменение сообщения"""
+
     model = Notification
     form_class = NotificationForm
     template_name = 'main/notification_form.html'
@@ -134,6 +152,8 @@ class NotificationUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class AttemptListView(ListView):
+    """Вывод лога рассылок"""
+
     model = Attempt
     extra_context = {'title': 'Лог рассылок'}
 
@@ -144,6 +164,7 @@ class AttemptListView(ListView):
 
 
 class NotificationDetailView(DetailView):
+    """Детализация сообщения"""
     model = Notification
     extra_context = {'title': 'Сообщение'}
 

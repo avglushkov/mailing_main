@@ -6,35 +6,6 @@ from pytils.translit import slugify
 from blog.models import Blog
 from blog.forms import BlogForm
 
-
-# class BlogCreateView(CreateView):
-#     model = Blog
-#     form_class = BlogForm
-#     template_name = 'blog/blog_form.html'
-#     success_url = reverse_lazy('blog:blogs')
-#     extra_context = {'title': 'Новая публикация'}
-#
-#     def form_valid(self, form):
-#         blog = form.save()
-#         blog.owner = self.request.user
-#         blog.save()
-#         return super().form_valid(form)
-
-
-# class BlogUpdateView(UpdateView):
-#     model = Blog
-#     form_class = BlogForm
-#     template_name = 'blog/blog_form.html'
-#     success_url = reverse_lazy('blog:blogs')
-#     extra_context = {'title': 'Изменение публикации'}
-
-
-# class BlogDetailView(DetailView):
-#     model = Blog
-#     # template_name = 'main/home.html'
-#     extra_context = {'title': 'Публикация'}
-
-# Create your views here.
 class BlogListView(ListView):
     model = Blog
     template_name = 'blog/blog_list.html'

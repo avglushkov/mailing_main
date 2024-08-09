@@ -21,6 +21,7 @@ from users.models import User
 
 
 class RegisterView(CreateView):
+    """Регистрация пользователя"""
     model = User
     form_class = UserRegisterForm
     template_name = 'users/register.html'
@@ -28,6 +29,7 @@ class RegisterView(CreateView):
     extra_context = {'title': 'Регистрация'}
 
     def form_valid(self, form):
+        """Отправка запроса на активацию"""
         user = form.save()
         user.is_active = False
         code = secrets.token_hex(16)
@@ -45,12 +47,14 @@ class RegisterView(CreateView):
 
 
 def email_verification(request, code):
+    """Активация пользователя"""
     user = get_object_or_404(User, code=code)
     user.is_active = True
     user.save()
     return redirect(reverse('users:login'))
 
 class ResetPasswordView(TemplateView):
+    """Сброс пароля"""
     model = User
     form_class = PasswordResetForm
     template_name = 'users/pass_reset.html'
@@ -58,6 +62,7 @@ class ResetPasswordView(TemplateView):
     extra_context = {'title': 'Смена пароля'}
 
     def post(self, request, *args, **kwargs):
+        """Сброс и отправка пароля пользователю на почту"""
         email = request.POST.get('email')
         try:
             user = User.objects.get(email=email)
@@ -78,12 +83,16 @@ class ResetPasswordView(TemplateView):
 
 
 class UserDoesNotFound(TemplateView):
+    """Проверка наличия пользователя в базе"""
+
     model=User
     template_name = 'users/user_does_not_found.html'
     extra_context = {'title': 'Пользователь не найден'}
 
 
 class ProfileView(LoginRequiredMixin, UpdateView):
+    """Вывод профиля пользователя"""
+
     extra_context = {'title': 'Профиль'}
     model = User
     form_class = UserProfileForm
@@ -95,6 +104,8 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 
 
 class UserListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    """Вывод списка пользователей"""
+
     model = User
     template_name = "users/users_list.html"
     permission_required = 'users.view_user'
@@ -107,6 +118,8 @@ class UserListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         return False
 
 class UserUpdateView(LoginRequiredMixin,PermissionRequiredMixin, UpdateView):
+    """Вывод формы для активации или деактивации пользователя"""
+
     model = User
     template_name = "users/update_user.html"
     form_class = UserUpdateForm
@@ -114,16 +127,3 @@ class UserUpdateView(LoginRequiredMixin,PermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy("users:users_list")
     extra_context = {'title': 'Изменение пользователя'}
 
-
-# @login_required
-# def block_user(request, pk):
-#     """Блокировка пользователя менеджером"""
-#     user = get_object_or_404(User, pk=pk)
-#     if user.is_active:
-#         user.is_active = False
-#     else:
-#         user.is_active = True
-#     user.save()
-#     return redirect(reverse('main:manager_view_user', kwargs={'pk': pk}))
-
-#
