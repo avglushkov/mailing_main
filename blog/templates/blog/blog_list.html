@@ -1,0 +1,54 @@
+{% extends 'main/base.html' %}
+{% load my_tags %}
+
+{% block content %}
+
+<br>
+<div class="row">
+    {% if user.is_authenticated %}
+    <div class="col-sm-12 mb-5">
+        <a class="btn btn-secondary btn-lg" href="{% url 'blog:blog_create' %}">Добавить публикацию</a>
+    </div>
+    {% endif %}
+
+</div>
+
+<table class="table">
+    <thead class="table-secondary">
+    <tr>
+        <th scope="col">Публикация</th>
+        <th scope="col">Текст</th>
+        <th scope="col">Просмотры</th>
+        <th scope="col">Статус публикации</th>
+        <th scope="col">Ссылка</th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+    {% for object in object_list %}
+    <tr>
+        <th scope="row">{{ object.header }}</th>
+        <td>{{ object.body|truncatechars:50 }}</td>
+        <td>{{ object.count }}</td>
+        <td>
+            {% if object.published %}
+            <p>Да</p>
+            {% else %}
+            <p>Нет</p>
+            {% endif %}
+        </td>
+        <td>
+            <a class="btn btn-outline-success" href="{% url 'blog:blog_detail' object.pk %}">
+                Подробнее
+            </a>
+            {% if user.is_superuser or perms.blog.change_blog or object.owner == user%}
+            <a class="btn btn-outline-warning" href="{% url 'blog:blog_update' object.pk %}">Изменить</a>
+            <a class="btn btn-outline-danger" href="{% url 'blog:confirm_delete' object.pk %}">Удалить</a>
+            {% endif %}
+
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

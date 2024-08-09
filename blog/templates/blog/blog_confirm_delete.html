@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+{% load my_tags %}
+{% block content %}
+
+<div class="col-sm-4 mb-3 mb-sm-0">
+
+    <div class="card">
+        <div class="card-body">
+
+            <form method="post">
+                {% csrf_token %}
+                <p>Вы уверены, что хотите удалить публикацию"?</p>
+
+                <button type="submit" class="btn btn-danger">Подтверждаю</button>
+                <a href="{% url 'blog:blogs' %}" class="btn btn-warning">Отменить</a>
+
+                <br>
+            </form>
+        </div>
+
+    </div>
+</div>
+</div>
+
+{% endblock %}

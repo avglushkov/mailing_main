@@ -4,11 +4,14 @@
 
 <div class="col-sm-4 mb-3 mb-sm-0">
     <div class="card">
+        <div class="card-header text-bg-secondary">
+            <h5 class="card-title text-center">{{ object.subject }}</h5>
+        </div>
         <div class="card-body">
 
-            <h4 class="card-title">{{ object.mailing }}</h4>
+
             <p class="card-text">Тема: {{ object.subject }}</p>
-            <p class="card-text">Содержимое: {{ object.body }}</p>
+            <p class="card-text">Содержимое: {{ object.body|truncatechars:100 }}</p>
 
 
         </div>

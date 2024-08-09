@@ -1,0 +1,32 @@
+[
+  {
+    "model": "main.client",
+    "pk": 1,
+    "fields": {
+      "email": "avgl@mail.ru",
+      "full_name": "Александр",
+      "description": "тест",
+      "owner": 15
+    }
+  },
+  {
+    "model": "main.client",
+    "pk": 5,
+    "fields": {
+      "email": "avgl1978@gmail.com",
+      "full_name": "Петров Петр Петрович",
+      "description": "Много букв оааыдвтыдлвтадывадоывраодорыодвародыврадоырвадоывраодыраодырадорывадорыоврадоырадоырвао",
+      "owner": 15
+    }
+  },
+  {
+    "model": "main.client",
+    "pk": 7,
+    "fields": {
+      "email": "avgl1978@yandex.ru",
+      "full_name": "Сидоров Иван Николаевич",
+      "description": "просто клиент",
+      "owner": 18
+    }
+  }
+]

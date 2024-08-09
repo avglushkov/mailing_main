@@ -2,16 +2,44 @@
 
 {% block content %}
 
-<div class="col-sm-4 mb-3 mb-sm-0">
+<div class="col-sm-6 mb-3 mb-sm-0">
     <div class="card">
         <div class="card-body">
 
-            <h4 class="card-title">{{ object.name }}</h4>
-            <p class="card-text">Время первой рассылки: {{ object.first_sending_time }}</p>
-            <p class="card-text">Периодичность: {{ object.periodicity }}</p>
-            <p class="card-text">Статус: {{ object.status  }}</p>
-            <p class="card-text">Клиенты: {{ object.clients }}</p>
+            <h4 class="card-title"><strong>{{ object.name }}</strong></h4>
 
+            {% if object.is_active %}
+            <p>Активна</p>
+            {% else %}
+            <p>Отключена</p>
+            {% endif %}
+
+            <p class="card-text">Начало рассылки: {{ object.first_sending }}</p>
+            <p class="card-text">Последняя рассылка: {{ object.last_sending }}</p>
+            <p class="card-text">Сдедующяя рассылка: {{ object.next_sending }}</p>
+            <br>
+
+            {% if object.periodicity == 'daily' %}
+            <p>Периодичность - Раз в день</p>
+            {% endif %}
+            {% if object.periodicity == 'weekly' %}
+            <p>Статус - Раз в неделю</p>
+            {% endif %}
+            {% if object.periodicity == 'monthly' %}
+            <p>Статус - Раз в месяц</p>
+            {% endif %}
+
+            {% if object.status == 'started' %}
+            <p>Статус - Запущена</p>
+            {% endif %}
+            {% if object.status == 'new' %}
+            <p>Статус - Создана</p>
+            {% endif %}
+            {% if object.status == 'finished' %}
+            <p>Статус - Завершена</p>
+            {% endif %}
+            <br>
+            <a href="{% url 'main:mailings' %}" class="btn btn-secondary">К списку рассылок</a>
         </div>
     </div>
 </div>
